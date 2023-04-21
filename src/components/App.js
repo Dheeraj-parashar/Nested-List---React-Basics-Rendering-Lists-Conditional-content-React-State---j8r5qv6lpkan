@@ -155,7 +155,58 @@ const states = [
 ];
 
 function App() {
-  return <div id="main"></div>;
+  function showCitiesFromState(state){
+    console.log(state)
+    setCityVisible(...cityVisible,[state.name]?false:true)
+  }
+  function showTownsFromCity(city){
+    console.log(city)
+    setTownVisible(...townVisible,[city.name]?false:true)
+  }
+  const initialValForState={}
+  states.map((state)=>{
+    let x=state.name.cities.name;               //how to do this
+    initialValForCity.x=false
+  }
+  )
+  const initialValForCity={}
+  states.map((state)=>{
+    let x=state.name;               //how to do this
+    initialValForState.x=false
+  }
+  )
+  console.log(initialValForState)
+  const[cityVisible,setCityVisible]=useState(initialValForState)
+  const[townVisible,setTownVisible]=useState(initialValFOrCity);
+  return <div id="main">
+    <ul>
+      {states.map((state,i)=>(
+      <li key={"states"+(i+1)} 
+      id={"states"+(i+1)} 
+      onClick={()=>showCitiesFromState(state)}>
+        {state.name}
+      
+      <ul>
+        {cityVisible[state.name] && state.cities.map((city,i)=>(
+          <li key={"cities"+i+1} id={"cities"+i+1} onClick={showTownsFromCity(city)}
+          >{city.name}
+            <ul>
+              {townVisible[city.name] && city.towns.map((town,i)=>(
+                <li key={"towns"+i+1} id={"towns"+i+1}>
+                  {town.name}
+                </li>
+              ))}
+
+            </ul>
+          </li>
+        ))
+        }
+      </ul>
+      
+      </li>))}
+      
+    </ul>
+  </div>;
 }
 
 export default App;
